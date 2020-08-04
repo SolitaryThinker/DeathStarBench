@@ -71,7 +71,7 @@ function _M.ReadHomeTimeline()
     -- ngx.redirect("../../index.html")
     -- ngx.exit(ngx.HTTP_OK)
     ngx.exit(ngx.HTTP_UNAUTHORIZED)
-    
+
   end
 
 
@@ -82,7 +82,7 @@ function _M.ReadHomeTimeline()
     -- ngx.say(login_obj.reason);
     -- ngx.exit(ngx.HTTP_OK)
     ngx.exit(ngx.HTTP_UNAUTHORIZED)
-    
+
   end
 
 
@@ -103,10 +103,10 @@ function _M.ReadHomeTimeline()
     -- ngx.say("Login token expired, please log in again")
     -- ngx.exit(ngx.HTTP_OK)
     ngx.exit(ngx.HTTP_UNAUTHORIZED)
-    
+
   else
     local client = GenericObjectPool:connection(
-        HomeTimelineServiceClient, "home-timeline-service", 9090)
+        HomeTimelineServiceClient, "home-timeline-service.social-network.svc.cluster.local", 9090)
     local status, ret = pcall(client.ReadHomeTimeline, client, req_id,
         user_id, tonumber(args.start), tonumber(args.stop), carrier)
     GenericObjectPool:returnConnection(client)
